@@ -1,7 +1,8 @@
 package com.simtechdata.commands;
 
-import com.simtechdata.enums.Option;
 import com.simtechdata.arguments.Arguments;
+import com.simtechdata.commands.interfaces.Command;
+import com.simtechdata.enums.Option;
 import com.simtechdata.log.Log;
 import com.simtechdata.work.Process;
 
@@ -29,7 +30,7 @@ public class Show
 
         if (Process.pathValid(pathString, option)) {
             try {
-                Process.processFiles(option, pathString, zipFilename, allFiles);
+                Process.files(option, pathString, zipFilename, allFiles);
             }
             catch (IOException e) {
                 Log.showLn("Error processing files: \n" + e.getMessage());

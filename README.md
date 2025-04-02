@@ -13,6 +13,7 @@ Upon re-opening projects that I wrote back when String Templates were available,
 ## Contents
 - [Installing](#installation)
 - [Compiling](#compiling)
+  - [Compile Scripts](#compile-scripts)
 - [What It Does](#what-fixjavastr-does)
   - [Command-Line Arguments](#command-line-arguments)
   - [Argument Requirements](#argument-requirements)
@@ -104,9 +105,12 @@ you need to run the `dograal.sh` or `dograal.bat` file. This will compile the ja
 which will run the program and ultimately it will generate the `reachability-metadata.json` file and put it in the 
 correct folder. After doing that, you simply run `native.sh` or `native.bat` to compile the native image.
 
+### Compile Scripts
+
 Here is a breakdown of what the different scripts do in the compile folder (there are Linux / MacOS `.sh` and Windows `.bat` versions of the scripts):
 
 In Linux / MacOS, run `chmod +x *.sh` first to make them executable.
+
 
 ``` bash
   compile - Simply makes the jar file and puts it in the target folder.
@@ -114,6 +118,8 @@ In Linux / MacOS, run `chmod +x *.sh` first to make them executable.
   native  - compiles the native-image
   runjar  - Runs the jar file in a JVM
 ```
+
+The `dograal` script must have a path to your projects folder passed into it: `./dograal.sh /path/to/java/projects` / `dograal.bat C:\\path\\to\\java\\projects`. It WILL NOT modify any of your files, it will simply run the program passively so that GraalVM can get what it needs.
 ## What FixJavaSTR Does
 
 It's really quite simple. The program goes through your java project folder recursively and looks for files containing String Template code (which was

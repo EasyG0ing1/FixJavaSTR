@@ -1,7 +1,7 @@
 package com.simtechdata.work;
 
-import com.simtechdata.enums.Option;
 import com.simtechdata.custom.CustomAtomicBoolean;
+import com.simtechdata.enums.Option;
 import com.simtechdata.log.Log;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -34,7 +34,7 @@ public class Process {
     private static final Map<String, String> fileContentMap = new ConcurrentHashMap<>();
 
 
-    public static void processFiles(Option option, String pathString, String zipFilename, boolean allFiles) throws IOException {
+    public static void files(Option option, String pathString, String zipFilename, boolean allFiles) throws IOException {
         Path       path          = Paths.get(pathString);
         List<Path> pathList      = new CopyOnWriteArrayList<>();
         List<File> dirtyFileList = new CopyOnWriteArrayList<>();
@@ -100,7 +100,7 @@ public class Process {
             }
 
             Log.showLn("\nZipping files to: " + zipFilePath.toAbsolutePath());
-            Zipping.zipFiles(dirtyFileList, zipFile, pathString);
+            Zip.zip(dirtyFileList, zipFile, pathString);
             if (zipFile.exists()) {
                 Log.showLn(" ".repeat(18) + "**** Files zipped successfully ****");
             }
@@ -229,19 +229,19 @@ public class Process {
         }
         templateMatcher.appendTail(transformed);
 
-        return removeWhitespaceAroundParens(transformed.toString());
+        return removeWhitespace(transformed.toString());
     }
 
     private static String cleanFMT(String content) {
-        Pattern fmtPattern = Pattern.compile("FMT\\.\"([^\"]*)\"");
-        Matcher fmtMatcher = fmtPattern.matcher(content);
-        StringBuffer result = new StringBuffer();
+        Pattern      fmtPattern = Pattern.compile("FMT\\.\"([^\"]*)\"");
+        Matcher      fmtMatcher = fmtPattern.matcher(content);
+        StringBuffer result     = new StringBuffer();
 
         while (fmtMatcher.find()) {
-            String template = fmtMatcher.group(1);
+            String        template     = fmtMatcher.group(1);
             StringBuilder formatString = new StringBuilder();
-            List<String> arguments = new ArrayList<>();
-            int lastEnd = 0;
+            List<String>  arguments    = new ArrayList<>();
+            int           lastEnd      = 0;
 
             Pattern exprPattern = Pattern.compile("(%[-\\d\\.]*[a-zA-Z])\\\\\\{([^}]+)\\}");
             Matcher exprMatcher = exprPattern.matcher(template);
@@ -255,12 +255,10 @@ public class Process {
 
             formatString.append(template.substring(lastEnd));
 
-            // Handle trailing \{...} or {...} for argument list
             Matcher trailingArgsMatcher = Pattern.compile("^(.*?)(\\\\?\\{([^}]+)})$").matcher(formatString.toString());
             if (trailingArgsMatcher.matches()) {
                 formatString = new StringBuilder(trailingArgsMatcher.group(1));
                 if (arguments.isEmpty()) {
-                    // Only add if not already added from inline matches
                     for (String arg : trailingArgsMatcher.group(3).split(",")) {
                         arguments.add(arg.trim());
                     }
@@ -269,7 +267,9 @@ public class Process {
 
             String replacement = arguments.isEmpty()
                                  ? "\"" + formatString.toString().replace("\"", "\\\"") + "\""
-                                 : "String.format(\"" + formatString.toString().replace("\"", "\\\"") + "\", " + String.join(", ", arguments) + ")";
+                                 : "String.format(\"" + formatString
+                                         .toString()
+                                         .replace("\"", "\\\"") + "\", " + String.join(", ", arguments) + ")";
 
             fmtMatcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
         }
@@ -278,7 +278,7 @@ public class Process {
         return result.toString();
     }
 
-    private static String removeWhitespaceAroundParens(String line) {
+    private static String removeWhitespace(String line) {
         StringBuilder result   = new StringBuilder();
         boolean       inQuotes = false;
 

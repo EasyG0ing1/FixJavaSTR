@@ -14,9 +14,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-public class Zipping {
+public class Zip {
 
-    public static void zipFiles(List<File> files, File zipFile, String rootPathString) throws IOException {
+    public static void zip(List<File> files, File zipFile, String rootPathString) throws IOException {
         if (zipFile.exists()) {
             Log.showLn("Zip file already exists, exiting\n");
             return;
@@ -42,7 +42,7 @@ public class Zipping {
         }
     }
 
-    public static void unzipFiles(String zipFilePathString, String unzipDirectory) throws IOException {
+    public static void unzip(String zipFilePathString, String unzipDirectory) throws IOException {
         File zipFile   = new File(zipFilePathString);
         Path unzipPath = Paths.get(unzipDirectory);
         Log.showLn("\nUnzipping files from: " + zipFile.getName() + "\n");

@@ -1,6 +1,7 @@
 package com.simtechdata.commands;
 
 import com.simtechdata.arguments.Arguments;
+import com.simtechdata.commands.interfaces.Command;
 import com.simtechdata.log.Log;
 
 public class Help

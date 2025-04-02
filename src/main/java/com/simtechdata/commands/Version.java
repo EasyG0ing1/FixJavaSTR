@@ -2,6 +2,7 @@ package com.simtechdata.commands;
 
 import com.simtechdata.App;
 import com.simtechdata.arguments.Arguments;
+import com.simtechdata.commands.interfaces.Command;
 import com.simtechdata.log.Log;
 
 import java.io.IOException;
@@ -9,7 +10,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class Version implements Command {
+public class Version
+        implements Command {
 
 
     private Arguments config;

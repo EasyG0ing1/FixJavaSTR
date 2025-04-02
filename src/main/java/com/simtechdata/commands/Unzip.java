@@ -1,10 +1,11 @@
 package com.simtechdata.commands;
 
-import com.simtechdata.enums.Option;
 import com.simtechdata.arguments.Arguments;
+import com.simtechdata.commands.interfaces.Command;
+import com.simtechdata.enums.Option;
 import com.simtechdata.log.Log;
 import com.simtechdata.work.Process;
-import com.simtechdata.work.Zipping;
+import com.simtechdata.work.Zip;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class Unzip
             Log.showLn("Into directory: " + unzipPathString);
             try {
                 Process.pressEnterToContinue();
-                Zipping.unzipFiles(zipFilePathString, unzipPathString);
+                Zip.unzip(zipFilePathString, unzipPathString);
             }
             catch (IOException e) {
                 Log.showLn("Error unzipping files: \n" + e.getMessage());

@@ -1,6 +1,7 @@
 package com.simtechdata.commands;
 
 import com.simtechdata.arguments.Arguments;
+import com.simtechdata.commands.interfaces.Command;
 import com.simtechdata.enums.Option;
 import com.simtechdata.log.Log;
 import com.simtechdata.work.Process;
@@ -26,8 +27,8 @@ public class Fix
             return;
         }
 
-        Option option = Option.FIX;
-        String pathString = args[1];
+        Option option      = Option.FIX;
+        String pathString  = args[1];
         String zipFilename = args[2];
 
         if (Process.pathValid(pathString, option) && !zipFilename.isEmpty()) {
@@ -35,7 +36,7 @@ public class Fix
             Log.showLn("Files under the path: " + pathString);
             Log.showLn("Will be zipped to:    " + zipFilePath);
             Log.showLn("Then, all String template code in those files will be converted back to concatenation");
-            if(allFiles) {
+            if (allFiles) {
                 Log.showLn("(ALL files in the directory will be searched for String templates)");
             }
             else {
@@ -43,7 +44,7 @@ public class Fix
             }
             try {
                 Process.pressEnterToContinue();
-                Process.processFiles(option, pathString, zipFilename, allFiles);
+                Process.files(option, pathString, zipFilename, allFiles);
             }
             catch (IOException e) {
                 Log.showLn("Error processing files: \n" + e.getMessage());

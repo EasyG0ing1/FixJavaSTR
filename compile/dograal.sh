@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 <target_directory>"
+  echo "Usage: $0 <java_project_directory>"
   exit 1
 fi
 

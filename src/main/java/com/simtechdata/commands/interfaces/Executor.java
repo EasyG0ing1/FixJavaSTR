@@ -1,7 +1,7 @@
-package com.simtechdata.commands;
+package com.simtechdata.commands.interfaces;
 
 import com.simtechdata.arguments.Arguments;
-import com.simtechdata.commands.interfaces.Command;
+import com.simtechdata.commands.*;
 import com.simtechdata.log.Log;
 
 import java.util.Arrays;

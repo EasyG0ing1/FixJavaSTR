@@ -2,7 +2,7 @@
 setlocal
 
 if "%~1"=="" (
-    echo Usage: %~nx0 ^<target_directory^>
+    echo Usage: %~nx0 ^<java_project_directory>^>
     exit /b 1
 )
 

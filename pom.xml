@@ -158,7 +158,7 @@
                                 <arg>-Djava.awt.headless=true</arg>
                                 <arg>--no-fallback</arg>
                                 <arg>--enable-native-access=ALL-UNNAMED</arg>
-                                <arg>--pgo-instrument</arg>
+                                <arg>--pgo=/Users/michael/JetBrainsProjects/IntelliJIdea/FixJavaSTR/compile/default.iprof</arg>
                                 <arg>-H:+UnlockExperimentalVMOptions</arg>
                                 <arg>-march=native</arg>
                                 <arg>-H:+ReportExceptionStackTraces</arg>
